@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
 {
+    [SerializeField] GameOverScreen deathMenu;
+    public GameObject died;
     CharacterController characterController;
     public float gravity = -15f;
     [SerializeField] private float yVelocity = 0f;
@@ -9,9 +11,9 @@ public class PlayerJump : MonoBehaviour
     public float jumpSpeed = 10f;
     void Start()
     {
+        gameObject.SetActive(true);
         characterController = GetComponent<CharacterController>();
     }
-
     void Update()
     {
         if (characterController.isGrounded)
@@ -30,4 +32,20 @@ public class PlayerJump : MonoBehaviour
         yVelocity += gravity * Time.deltaTime;
         characterController.Move(new Vector3(0, yVelocity * Time.deltaTime, 0));
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Kill"))
+        {
+            Death();
+        }
+    }
+    void Death()
+    {
+        Instantiate(died, transform.position, Quaternion.identity);
+        deathMenu.ActiveScreenLose();
+        GetComponent<CharacterController>().enabled = false;
+        gameObject.SetActive(false);
+    }
+
 }

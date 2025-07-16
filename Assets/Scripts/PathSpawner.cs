@@ -3,12 +3,12 @@ using UnityEngine;
 public class PathSpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] paths;
-    [SerializeField] float spawnInterval;
+    [SerializeField] float spawnInterval =2.5f;
     public Transform spawner;
     void Start()
     {
         SpawnPath();
-        InvokeRepeating("SpawnPath", 0, spawnInterval);
+        InvokeRepeating("SpawnPath", 2.5f, spawnInterval);
     }
     public void SpawnPath()
     {

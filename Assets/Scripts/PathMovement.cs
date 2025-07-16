@@ -3,10 +3,10 @@ using UnityEngine;
 public class PathMovement : MonoBehaviour
 {
     [SerializeField]
-    float speed = 1f;
+    float speed = 2f;
     void Update()
     {
-        transform.Translate(Vector3.back * speed * Time.deltaTime);
+        transform.Translate(Vector3.left * speed * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)

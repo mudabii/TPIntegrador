@@ -4,16 +4,18 @@ using UnityEngine.SceneManagement;
 public class GameOverScreen : MonoBehaviour
 {
     [SerializeField] GameObject GameOverPanel;
+    AudioSource deathSound;
     void Start()
     {
         Cursor.visible = false;
         GameOverPanel.SetActive(false);
+        deathSound = GetComponent<AudioSource>();
     }
 
     public void ActiveScreenLose()
     {
+        deathSound.Play();
         Cursor.visible = true;
-        Time.timeScale = 0f;
         GameOverPanel.SetActive(true);
     }
 
@@ -27,6 +29,6 @@ public class GameOverScreen : MonoBehaviour
     public void MainMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("MainMenu");
     }
 }
